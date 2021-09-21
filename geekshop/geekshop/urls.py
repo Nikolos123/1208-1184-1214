@@ -27,6 +27,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('products/', include('mainapp.urls',namespace='mainapp')),
 
+
 ]
 
 if settings.DEBUG:
