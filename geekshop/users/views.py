@@ -49,14 +49,18 @@ def profile(request):
         form = UserProfileForm(data=request.POST,instance=request.user,files=request.FILES)
         if form.is_valid():
             form.save()
+            messages.error(request, 'Профиль не сохранен')
             return HttpResponseRedirect(reverse('users:profile'))
         else:
-            print(form.errors)
+            messages.error(request,'Профиль не сохранен')
+
+
+
 
     context = {
         'title': 'Geekshop - Профайл',
         'form': UserProfileForm(instance=request.user),
-        'baskets': Basket.objects.filter(user = request.user)
+        'baskets': Basket.objects.filter(user = request.user),
     }
     return render(request,'users/profile.html',context)
 
