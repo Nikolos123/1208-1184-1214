@@ -1,0 +1,15 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JTQu9GPINCw0LrRgtC40LLQsNGG0LjQuCDRg9GH0LXRgtC90L7QuSDQt9Cw0L8=?=
+ =?utf-8?b?0LjRgdC4IHRlc3RfYWxla3NhbmRyINC/0YDQvtC50LTQuNGC0LUg0L/QviDRgdGB?=
+ =?utf-8?b?0YvQu9C60LU=?=
+From: django
+To: test_aleksandr@mail.ru
+Date: Tue, 12 Oct 2021 19:21:40 -0000
+Message-ID: <163406650070.8403.12179528174369972738@nik-System-Product-Name>
+
+Для подтверждения учетной записи test_aleksandr на портале 
+ http:/localhost:8000/users/verify/test_aleksandr@mail.ru/ef5dac837199dc4463e1ef0af91cde2937f54236/
+-------------------------------------------------------------------------------
