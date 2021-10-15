@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
+from django.db import transaction
 from django.shortcuts import render, HttpResponseRedirect, redirect, get_object_or_404
 from django.contrib import auth, messages
 from django.urls import reverse,reverse_lazy
@@ -58,15 +59,17 @@ class ProfileFormView(UpdateView,BaseClassContextMixin,UserDispatchMixin):
     # def dispatch(self, request, *args, **kwargs):
     #     return super(ProfileFormView, self).dispatch(request, *args, **kwargs)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(ProfileFormView, self).get_context_data(**kwargs)
-    #     context['baskets'] = Basket.objects.filter(user=self.request.user)
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super(ProfileFormView, self).get_context_data(**kwargs)
+        context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile)
+        return context
 
+    @transaction.atomic
     def post(self, request, *args, **kwargs):
-        form = self.form_class(data=request.POST,files=request.FILES,instance=self.get_object())
-        form_edit = UserProfileEditForm(data=request.POST,instance=request.user.userprofile)
-        if form.is_valid() and form_edit.is_valid():
+        form = UserProfileForm(data=request.POST,files=request.FILES,instance=request.user)
+        profile_form = UserProfileEditForm(request.POST,instance=request.user.userprofile)
+        if form.is_valid() and profile_form.is_valid():
+            # form_edit.save()
             form.save()
             return redirect(self.success_url)
         return redirect(self.success_url)
