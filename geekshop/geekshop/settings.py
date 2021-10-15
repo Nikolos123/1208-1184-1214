@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'mainapp',
     'users',
     'baskets',
-    'admins'
+    'admins',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,14 @@ LOGIN_REDIRECT_URL = '/'
 # EMAIL_HOST_USER , EMAIL_HOST_PASSWORD = None ,None
 #python -m smtpd -n -c DebuggingServer localhost:25
 
+# ID приложения	7976606
+# Защищённый ключ 	sYQaJgvTVebxBFbZYYJZ
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7976606'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'sYQaJgvTVebxBFbZYYJZ'
+SOCIAL_AUTH_VK_OAUTH2_API_VERSION = '5.131'
+
+AUTHENTICATION_BACKENDS=(
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2',
+)

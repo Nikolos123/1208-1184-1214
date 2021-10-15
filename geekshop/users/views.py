@@ -12,7 +12,7 @@ from django.views.generic import ListView, FormView, UpdateView
 
 from baskets.models import Basket
 from geekshop.mixin import BaseClassContextMixin, CustomDispatchMixin, UserDispatchMixin
-from users.forms import UserLoginForm,UserRegisterForm,UserProfileForm
+from users.forms import UserLoginForm, UserRegisterForm, UserProfileForm, UserProfileEditForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from users.models import User
@@ -65,7 +65,8 @@ class ProfileFormView(UpdateView,BaseClassContextMixin,UserDispatchMixin):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST,files=request.FILES,instance=self.get_object())
-        if form.is_valid():
+        form_edit = UserProfileEditForm(data=request.POST,instance=request.user.userprofile)
+        if form.is_valid() and form_edit.is_valid():
             form.save()
             return redirect(self.success_url)
         return redirect(self.success_url)
