@@ -47,13 +47,11 @@ window.onload = function () {
         orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-DELETE', ''));
         if (target.checked) {
             delta_quantity = -quantity_arr[orderitem_num];
-        }else{
+        } else {
             delta_quantity = quantity_arr[orderitem_num];
         }
-         orderSummerUpdate(price_arr[orderitem_num], delta_quantity)
+        orderSummerUpdate(price_arr[orderitem_num], delta_quantity)
     });
-
-
 
 
     $('.formset_row').formset({
@@ -63,7 +61,7 @@ window.onload = function () {
         removed: deleteOrderItem,
     });
 
-    function  deleteOrderItem(row) {
+    function deleteOrderItem(row) {
         let target_name = row[0].querySelector('input[type="number"]').name;
         orderitem_num = parseInt(target_name.replace('orderitems-', '').replace('-quantity', ''));
         delta_quantity = -quantity_arr[orderitem_num];
@@ -79,5 +77,33 @@ window.onload = function () {
         $('.order_total_cost').html(order_total_price.toString() + ',00');
 
     }
+
+    // $('.order_form select').change(function () {
+    $(document).on('change', '.order_form select', function () {
+
+        let target = event.target;
+        orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-product', ''));
+        // console.log(orderitem_num)
+        let orderitem_product_pk = target.options[target.selectedIndex].value;
+        console.log(orderitem_product_pk)
+
+        if (orderitem_product_pk) {
+            $.ajax({
+                url: '/orders/product/' + orderitem_product_pk + '/price/',
+                success: function (data) {
+                    if (data.price) {
+                        price_arr[orderitem_num] = parseFloat(data.price)
+                        if (isNaN(quantity_arr[orderitem_num])) {
+                            quantity_arr[orderitem_num] = 0;
+                        }
+                        let price_html = '<span class="orderitems-' + orderitem_num + '-price">' + data.price.toString().replace('.', ',') + '</span> руб';
+                        let current_tr = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
+                        current_tr.find('td:eq(2)').html(price_html);
+                    }
+                }
+
+            });
+        }
+    });
 
 }
