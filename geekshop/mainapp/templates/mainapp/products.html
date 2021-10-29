@@ -1,6 +1,5 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
-
 {% block css %}
     <link href="{% static 'css/products.css' %}" rel="stylesheet">
 {% endblock %}
@@ -71,6 +70,7 @@
                                     </h4>
                                     <h5>{{ product.price }} руб.</h5>
                                     <p class="card-text">{{ product.description }}</p>
+                                    <p class="card-text">{{ product.category.name }}</p>
                                 </div>
 
                                 <div class="card-footer text-center">
