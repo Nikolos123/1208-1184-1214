@@ -9,6 +9,7 @@ from django.urls import reverse,reverse_lazy
 
 # Create your views here.
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, FormView, UpdateView
 
 from baskets.models import Basket
@@ -18,7 +19,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 from users.models import User
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class LoginListView(LoginView,BaseClassContextMixin):
         template_name = 'users/login.html'
         form_class = UserLoginForm

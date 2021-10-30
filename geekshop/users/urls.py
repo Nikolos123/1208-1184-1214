@@ -15,12 +15,14 @@ Including another URLconf
 """
 
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
+
 from .views import RegisterListView,ProfileFormView,Logout,LoginListView
 
 app_name = 'users'
 urlpatterns = [
 
-    path('login/', LoginListView.as_view(), name='login'),
+    path('login/',  csrf_exempt(LoginListView.as_view()), name='login'),
     path('register/', RegisterListView.as_view(), name='register'),
     path('profile/', ProfileFormView.as_view(), name='profile'),
     path('logout/', Logout.as_view(), name='logout'),
