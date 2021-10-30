@@ -19,11 +19,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 from users.models import User
 
-@method_decorator(csrf_exempt, name='dispatch')
-class LoginListView(LoginView,BaseClassContextMixin):
+# @method_decorator(csrf_exempt, name='dispatch')
+class LoginListView(LoginView):
         template_name = 'users/login.html'
         form_class = UserLoginForm
-        title = 'Geekshop - Авторизация'
         # success_url = reverse_lazy('index')
 
 

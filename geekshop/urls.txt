@@ -1,2 +1,1 @@
-http://127.0.0.1:8000/users/login/ POST username=nikolay_t&password=Isponec_2
-http://127.0.0.1:8000/users/profile
+http://80.78.248.142/users/login/ POST username=nik&password=1

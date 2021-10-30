@@ -22,7 +22,7 @@ from .views import RegisterListView,ProfileFormView,Logout,LoginListView
 app_name = 'users'
 urlpatterns = [
 
-    path('login/',  csrf_exempt(LoginListView.as_view()), name='login'),
+    path('login/',  LoginListView.as_view(), name='login'),
     path('register/', RegisterListView.as_view(), name='register'),
     path('profile/', ProfileFormView.as_view(), name='profile'),
     path('logout/', Logout.as_view(), name='logout'),
